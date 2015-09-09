@@ -35,8 +35,7 @@ SET default_with_oids = false;
 
 CREATE TABLE categories (
     id integer NOT NULL,
-    type character varying,
-    region character varying
+    type character varying
 );
 
 
@@ -157,7 +156,7 @@ ALTER TABLE ONLY jokes_categories ALTER COLUMN id SET DEFAULT nextval('jokes_cat
 -- Data for Name: categories; Type: TABLE DATA; Schema: public; Owner: Guest
 --
 
-COPY categories (id, type, region) FROM stdin;
+COPY categories (id, type) FROM stdin;
 \.
 
 

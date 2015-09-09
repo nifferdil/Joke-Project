@@ -59,7 +59,7 @@ public class CategoryTest {
   }
 
   @Test
-  public void delete_deletesAllJokesAndListAssoications() {
+  public void delete_deletesAllJokesAndListAssociations() {
     Category myCategory = new Category("Riddle", "Holiday");
     myCategory.save();
     Joke myJoke = new Joke("Knock Knock", "Orange you glad", 1);
