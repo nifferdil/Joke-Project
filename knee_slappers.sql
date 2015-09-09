@@ -10,14 +10,14 @@ SET check_function_bodies = false;
 SET client_min_messages = warning;
 
 --
--- Name: plpgsql; Type: EXTENSION; Schema: -; Owner:
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
 --
 
 CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 
 
 --
--- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner:
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
 --
 
 COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
@@ -30,7 +30,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: categories; Type: TABLE; Schema: public; Owner: Guest; Tablespace:
+-- Name: categories; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
 --
 
 CREATE TABLE categories (
@@ -64,7 +64,7 @@ ALTER SEQUENCE categories_id_seq OWNED BY categories.id;
 
 
 --
--- Name: jokes; Type: TABLE; Schema: public; Owner: Guest; Tablespace:
+-- Name: jokes; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
 --
 
 CREATE TABLE jokes (
@@ -76,6 +76,40 @@ CREATE TABLE jokes (
 
 
 ALTER TABLE jokes OWNER TO "Guest";
+
+--
+-- Name: jokes_categories; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
+--
+
+CREATE TABLE jokes_categories (
+    id integer NOT NULL,
+    joke_id integer,
+    category_id integer
+);
+
+
+ALTER TABLE jokes_categories OWNER TO "Guest";
+
+--
+-- Name: jokes_categories_id_seq; Type: SEQUENCE; Schema: public; Owner: Guest
+--
+
+CREATE SEQUENCE jokes_categories_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE jokes_categories_id_seq OWNER TO "Guest";
+
+--
+-- Name: jokes_categories_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Guest
+--
+
+ALTER SEQUENCE jokes_categories_id_seq OWNED BY jokes_categories.id;
+
 
 --
 -- Name: jokes_id_seq; Type: SEQUENCE; Schema: public; Owner: Guest
@@ -113,6 +147,13 @@ ALTER TABLE ONLY jokes ALTER COLUMN id SET DEFAULT nextval('jokes_id_seq'::regcl
 
 
 --
+-- Name: id; Type: DEFAULT; Schema: public; Owner: Guest
+--
+
+ALTER TABLE ONLY jokes_categories ALTER COLUMN id SET DEFAULT nextval('jokes_categories_id_seq'::regclass);
+
+
+--
 -- Data for Name: categories; Type: TABLE DATA; Schema: public; Owner: Guest
 --
 
@@ -136,6 +177,21 @@ COPY jokes (id, questions, answers, hilarity) FROM stdin;
 
 
 --
+-- Data for Name: jokes_categories; Type: TABLE DATA; Schema: public; Owner: Guest
+--
+
+COPY jokes_categories (id, joke_id, category_id) FROM stdin;
+\.
+
+
+--
+-- Name: jokes_categories_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
+--
+
+SELECT pg_catalog.setval('jokes_categories_id_seq', 1, false);
+
+
+--
 -- Name: jokes_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
@@ -143,7 +199,7 @@ SELECT pg_catalog.setval('jokes_id_seq', 1, false);
 
 
 --
--- Name: categories_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace:
+-- Name: categories_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace: 
 --
 
 ALTER TABLE ONLY categories
@@ -151,7 +207,15 @@ ALTER TABLE ONLY categories
 
 
 --
--- Name: jokes_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace:
+-- Name: jokes_categories_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace: 
+--
+
+ALTER TABLE ONLY jokes_categories
+    ADD CONSTRAINT jokes_categories_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: jokes_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace: 
 --
 
 ALTER TABLE ONLY jokes
@@ -171,3 +235,4 @@ GRANT ALL ON SCHEMA public TO PUBLIC;
 --
 -- PostgreSQL database dump complete
 --
+
