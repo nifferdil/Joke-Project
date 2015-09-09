@@ -29,7 +29,7 @@ public class CategoryTest {
   }
 
   @Test
-  public void find_findAuthorInDatabase_true() {
+  public void find_findCategoryInDatabase_true() {
     Category myCategory = new Category("Pun", "Spain");
     myCategory.save();
     Category savedCategory = Category.find(myCategory.getId());
@@ -38,35 +38,35 @@ public class CategoryTest {
 
   @Test
   public void addJoke_addsJokeToCategory() {
-    // Category myCategory = new Category("Riddle", "Holiday");
-    // myCategory.save();
-    // Joke myJoke = new Joke("Knock Knock", "Orange you glad", 1);
-    // myJoke.save();
-    // myCategory.addJoke(myJoke);
-    // Joke savedJoke = myCategory.getJokes().get(0);
-    // assertTrue(myJoke.equals(savedJoke));
+    Category myCategory = new Category("Riddle", "Holiday");
+    myCategory.save();
+    Joke myJoke = new Joke("Knock Knock", "Orange you glad", 1);
+    myJoke.save();
+    myCategory.addJoke(myJoke);
+    Joke savedJoke = myCategory.getJokes().get(0);
+    assertTrue(myJoke.equals(savedJoke));
   }
 
   @Test
   public void getJokes_returnsAllJokes_ArrayList() {
-    // Category myCategory = new Category("Riddle", "Holiday");
-    // myCategory.save();
-    // Joke myJoke = new Joke("Knock Knock", "Orange you glad", 1);
-    // myJoke.save();
-    // myCategory.addJoke(myJoke);
-    // List savedJokes = myCategory.getJokes();
-    // assertEquals(savedJokes.size(), 1);
+    Category myCategory = new Category("Riddle", "Holiday");
+    myCategory.save();
+    Joke myJoke = new Joke("Knock Knock", "Orange you glad", 1);
+    myJoke.save();
+    myCategory.addJoke(myJoke);
+    List savedJokes = myCategory.getJokes();
+    assertEquals(savedJokes.size(), 1);
   }
 
   @Test
   public void delete_deletesAllJokesAndListAssoications() {
-    // Category myCategory = new Category("Riddle", "Holiday");
-    // myCategory.save();
-    // Joke myJoke = new Joke("Knock Knock", "Orange you glad", 1);
-    // myJoke.save();
-    // myCategory.addJoke(myJoke);
-    // myCategory.delete();
-    // assertEquals(myJoke.getCategories().size(), 0);
+    Category myCategory = new Category("Riddle", "Holiday");
+    myCategory.save();
+    Joke myJoke = new Joke("Knock Knock", "Orange you glad", 1);
+    myJoke.save();
+    myCategory.addJoke(myJoke);
+    myCategory.delete();
+    assertEquals(myJoke.getCategories().size(), 0);
   }
 
 }
