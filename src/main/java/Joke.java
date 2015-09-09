@@ -51,7 +51,7 @@ public class Joke {
 
   public void save() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO jokes(question, answer, hilarity) VALUES (:question, :answer, :hilarity)";
+      String sql = "INSERT INTO jokes (question, answer, hilarity) VALUES (:question, :answer, :hilarity)";
       this.id = (int) con.createQuery(sql, true)
       .addParameter("question", this.question)
       .addParameter("answer", this.answer)

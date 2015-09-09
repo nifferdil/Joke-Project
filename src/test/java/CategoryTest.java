@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import java.util.ArrayList;
 import org.junit.*;
 import static org.junit.Assert.*;
@@ -23,4 +22,3 @@ public class CategoryTest {
   }
 
 }
->>>>>>> cfbab9cd574d751582484c66e0888dfa8ecfb5a0
