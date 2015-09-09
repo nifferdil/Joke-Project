@@ -38,35 +38,51 @@ public class CategoryTest {
 
   @Test
   public void addJoke_addsJokeToCategory() {
-    // Category myCategory = new Category("Riddle", "Holiday");
-    // myCategory.save();
-    // Joke myJoke = new Joke("Knock Knock", "Orange you glad", 1);
-    // myJoke.save();
-    // myCategory.addJoke(myJoke);
-    // Joke savedJoke = myCategory.getJokes().get(0);
-    // assertTrue(myJoke.equals(savedJoke));
+    Category myCategory = new Category("Riddle", "Holiday");
+    myCategory.save();
+    Joke myJoke = new Joke("Knock Knock", "Orange you glad", 1);
+    myJoke.save();
+    myCategory.addJoke(myJoke);
+    Joke savedJoke = myCategory.getJokes().get(0);
+    assertTrue(myJoke.equals(savedJoke));
   }
 
   @Test
   public void getJokes_returnsAllJokes_ArrayList() {
-    // Category myCategory = new Category("Riddle", "Holiday");
-    // myCategory.save();
-    // Joke myJoke = new Joke("Knock Knock", "Orange you glad", 1);
-    // myJoke.save();
-    // myCategory.addJoke(myJoke);
-    // List savedJokes = myCategory.getJokes();
-    // assertEquals(savedJokes.size(), 1);
+    Category myCategory = new Category("Riddle", "Holiday");
+    myCategory.save();
+    Joke myJoke = new Joke("Knock Knock", "Orange you glad", 1);
+    myJoke.save();
+    myCategory.addJoke(myJoke);
+    List savedJokes = myCategory.getJokes();
+    assertEquals(savedJokes.size(), 1);
   }
 
   @Test
   public void delete_deletesAllJokesAndListAssoications() {
-    // Category myCategory = new Category("Riddle", "Holiday");
-    // myCategory.save();
-    // Joke myJoke = new Joke("Knock Knock", "Orange you glad", 1);
-    // myJoke.save();
-    // myCategory.addJoke(myJoke);
-    // myCategory.delete();
-    // assertEquals(myJoke.getCategories().size(), 0);
+    Category myCategory = new Category("Riddle", "Holiday");
+    myCategory.save();
+    Joke myJoke = new Joke("Knock Knock", "Orange you glad", 1);
+    myJoke.save();
+    myCategory.addJoke(myJoke);
+    myCategory.delete();
+    assertEquals(myJoke.getCategories().size(), 0);
+  }
+
+  @Test
+  public void updateType_changesType() {
+    Category myCategory = new Category("Riddle", "Holiday");
+    myCategory.save();
+    myCategory.updateType("Family");
+    assertEquals("Family", Category.all().get(0).getType());
+  }
+
+  @Test
+  public void updateRegion_changesRegion() {
+    Category myCategory = new Category("Riddle", "Holiday");
+    myCategory.save();
+    myCategory.updateRegion("Canada");
+    assertEquals("Canada", Category.all().get(0).getRegion());
   }
 
 }

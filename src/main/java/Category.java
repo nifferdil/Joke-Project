@@ -103,7 +103,7 @@ public class Category {
     }
   }
 
-  public void updateRegion(String type) {
+  public void updateRegion(String region) {
     try(Connection con = DB.sql2o.open()) {
       String sql = "UPDATE categories SET region = :region WHERE id = :id";
       con.createQuery(sql)
