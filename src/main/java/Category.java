@@ -36,7 +36,7 @@ public class Category {
   }
 
   public static List<Category> all() {
-    String sql = "SELECT DISTINCT * FROM categories ORDER BY name ASC";
+    String sql = "SELECT DISTINCT * FROM categories ORDER BY type ASC";
     try(Connection con = DB.sql2o.open()) {
       return con.createQuery(sql).executeAndFetch(Category.class);
     }
