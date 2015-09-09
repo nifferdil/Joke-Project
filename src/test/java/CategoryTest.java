@@ -29,7 +29,7 @@ public class CategoryTest {
   }
 
   @Test
-  public void find_findAuthorInDatabase_true() {
+  public void find_findCategoryInDatabase_true() {
     Category myCategory = new Category("Pun", "Spain");
     myCategory.save();
     Category savedCategory = Category.find(myCategory.getId());
