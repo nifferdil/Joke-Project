@@ -30,4 +30,8 @@ public class Joke {
     this.hilarity = hilarity;
   }
 
+  public void add() {
+    
+  }
+
 }
