@@ -35,6 +35,96 @@ public class Category {
     }
   }
 
+  public static List<Category> all() {
+    String sql = "SELECT DISTINCT * FROM categories ORDER BY name ASC";
+    try(Connection con = DB.sql2o.open()) {
+      return con.createQuery(sql).executeAndFetch(Category.class);
+    }
+  }
 
+  public void save() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "INSERT INTO categories(type, region) VALUES (:type, :region)";
+      this.id = (int) con.createQuery(sql, true)
+      .addParameter("type", this.type)
+      .addParameter("region", this.region)
+      .executeUpdate()
+      .getKey();
+    }
+  }
+
+  public static Category find(int id) {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT * FROM categories WHERE id=:id";
+      Category Category = con.createQuery(sql)
+      .addParameter("id", id)
+      .executeAndFetchFirst(Category.class);
+      return Category;
+    }
+  }
+
+  public void addJoke(Joke joke) {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "INSERT INTO jokes_categories (joke_id, category_id) VALUES (:joke_id, :category_id)";
+      con.createQuery(sql)
+      .addParameter("joke_id", joke.getId())
+      .addParameter("category_id", this.getId())
+      .executeUpdate();
+    }
+  }
+
+  public ArrayList<Joke> getJokes() {
+    try(Connection con = DB.sql2o.open()){
+      String sql = "SELECT joke_id FROM jokes_categories WHERE category_id = :category_id";
+      List<Integer> jokeIds = con.createQuery(sql)
+      .addParameter("category_id", this.getId())
+      .executeAndFetch(Integer.class);
+
+      ArrayList<Joke> jokes = new ArrayList<Joke>();
+
+      for (Integer jokeId : jokeIds) {
+        String jokeQuery = "Select * From jokes WHERE id = :jokeId";
+        Joke joke = con.createQuery(jokeQuery)
+        .addParameter("jokeId", jokeId)
+        .executeAndFetchFirst(Joke.class);
+        jokes.add(joke);
+      }
+      return jokes;
+    }
+  }
+
+  public void updateType(String type) {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "UPDATE categories SET type = :type WHERE id = :id";
+      con.createQuery(sql)
+      .addParameter("type", type)
+      .addParameter("id", id)
+      .executeUpdate();
+    }
+  }
+
+  public void updateRegion(String type) {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "UPDATE categories SET region = :region WHERE id = :id";
+      con.createQuery(sql)
+      .addParameter("region", region)
+      .addParameter("id", id)
+      .executeUpdate();
+    }
+  }
+
+  public void delete() {
+    try(Connection con = DB.sql2o.open()) {
+      String deleteQuery = "DELETE FROM categories WHERE id = :id;";
+      con.createQuery(deleteQuery)
+      .addParameter("id", id)
+      .executeUpdate();
+
+      String joinDeleteQuery = "DELETE FROM jokes_categories WHERE category_id = :categoryId";
+      con.createQuery(joinDeleteQuery)
+      .addParameter("categoryId", this.getId())
+      .executeUpdate();
+    }
+  }
 
 }
