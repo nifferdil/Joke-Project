@@ -24,4 +24,17 @@ public class Category {
     this.region = region;
   }
 
+  @Override
+  public boolean equals(Object otherCategory) {
+    if (!(otherCategory instanceof Category)) {
+      return false;
+    } else {
+      Category newCategory = (Category) otherCategory;
+      return this.getType().equals(newCategory.getType()) &&
+             this.getRegion().equals(newCategory.getRegion());
+    }
+  }
+
+
+
 }
