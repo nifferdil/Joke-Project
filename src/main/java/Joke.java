@@ -30,8 +30,19 @@ public class Joke {
     this.hilarity = hilarity;
   }
 
+
+  @Override
+  public boolean equals(Object otherJoke){
+    if (!(otherJoke instanceof Joke)) {
+      return false;
+    } else {
+      Joke newJoke = (Joke) otherJoke;
+      return this.getQuestion().equals(newJoke.getQuestion());
+    }
+  }
+
   public void add() {
-    
+
   }
 
 }
