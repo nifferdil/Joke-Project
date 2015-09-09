@@ -28,7 +28,7 @@ In this little joke machine, you can create a database of jokes, and lend these 
 
 ## Database Schema
 
-<img src="/src/main/resources/public/img/sql_schema.png">
+![ScreenShot](https://cloud.githubusercontent.com/assets/10698013/9769229/ba8420d0-56dd-11e5-9c08-d3ae654f02af.png)
 
 ## Technologies Used
 
