@@ -8,5 +8,6 @@ public class CategoryTest {
   @Rule
   public DatabaseRule database = new DatabaseRule();
 
+  @Test
   
 }
