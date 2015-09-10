@@ -45,18 +45,10 @@ public class JokeTest {
 
 
     @Test
-    public void search_filtersJokesQuestions() {
+    public void search_filtersJokes() {
       Joke myJoke = new Joke("What does a ghost eat for breakfast?", "booberries");
       myJoke.save();
-      List searchResult = Joke.searchQuestion("ghost");
-      assertTrue(myJoke.equals(searchResult.get(0)));
-    }
-
-    @Test
-    public void search_filtersJokesAnswers() {
-      Joke myJoke = new Joke("What does a ghost eat for breakfast?", "booberries");
-      myJoke.save();
-      List searchResult = Joke.searchAnswer("boo");
+      List searchResult = Joke.search("ghost");
       assertTrue(myJoke.equals(searchResult.get(0)));
     }
 
