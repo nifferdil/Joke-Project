@@ -1,0 +1,17 @@
+<h1>Add a joke to $category.getType()</h1>
+
+Add a joke to make someone smile.
+
+<form action="/jokes" method="post">
+  <input id="categoryId" name="categoryId" type="hidden" value="$category.getId()">
+
+  <div class="form-group">
+    <label for="question">Add joke: (Max 8000 characters)</label>
+    <input id="question" name="question" type="text" class="form-control">
+    <br>
+    <label for="answer">Add punchline (optional)</label>
+    <input id="answer" name="answer" type="text" class="form-control">
+  </div>
+
+  <button type="submit" class="btn btn-success">Add joke</button>
+</form>
