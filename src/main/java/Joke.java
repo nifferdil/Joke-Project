@@ -103,23 +103,13 @@ public class Joke {
   }
 
 
-    public static List<Joke> searchQuestion(String searchJokeQuestion) {
-      String lowerCaseSearch = searchJokeQuestion.toLowerCase();
+    public static List<Joke> search(String searchJoke) {
+      String lowerCaseSearch = searchJoke.toLowerCase();
       String sql = "SELECT * FROM jokes WHERE LOWER (jokes.question) LIKE '%" + lowerCaseSearch + "%'";
+      String sql2 = "SELECT * FROM jokes WHERE LOWER (jokes.answer) LIKE '%" + lowerCaseSearch + "%'";
       List<Joke> jokeResults;
       try (Connection con = DB.sql2o.open()) {
-        jokeResults = con.createQuery(sql)
-          .executeAndFetch(Joke.class);
-      }
-      return jokeResults;
-    }
-
-    public static List<Joke> searchAnswer(String searchJokeAnswer) {
-      String lowerCaseSearch = searchJokeAnswer.toLowerCase();
-      String sql = "SELECT * FROM jokes WHERE LOWER (jokes.answer) LIKE '%" + lowerCaseSearch + "%'";
-      List<Joke> jokeResults;
-      try (Connection con = DB.sql2o.open()) {
-        jokeResults = con.createQuery(sql)
+        jokeResults = con.createQuery(sql, sql2)
           .executeAndFetch(Joke.class);
       }
       return jokeResults;
