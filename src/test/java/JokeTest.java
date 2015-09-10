@@ -73,7 +73,7 @@ public class JokeTest {
       Joke myJoke = new Joke("What does a ghost eat for breakfast?", "booberries");
       myJoke.save();
       myJoke.hilarityUp();
-      assertEquals(-1, Joke.all().get(0).getHilarity());
+      assertEquals(1, Joke.all().get(0).getHilarity());
       }
 
 

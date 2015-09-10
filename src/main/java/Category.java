@@ -48,10 +48,10 @@ public class Category {
   public static Category find(int id) {
     try(Connection con = DB.sql2o.open()) {
       String sql = "SELECT * FROM categories WHERE id=:id";
-      Category Category = con.createQuery(sql)
+      Category category = con.createQuery(sql)
       .addParameter("id", id)
       .executeAndFetchFirst(Category.class);
-      return Category;
+      return category;
     }
   }
 
@@ -119,5 +119,6 @@ public class Category {
       .executeUpdate();
     }
   }
+  
 
 }
