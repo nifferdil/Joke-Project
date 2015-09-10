@@ -5,20 +5,20 @@
 #if($category.getJokes().size() != 0)
 <h2>The following jokes are currently assigned to $category.getType():</h2>
   <table border="1" class="table table-striped">
+    <th>Hilarious?</th>
     <th>Question</th>
     <th>Answer</th>
-    <th>Hilarity</th>
 
     <tbody>
     #foreach($joke in $category.getJokes())
       <tr>
-        <td><a href="/jokes/$joke.getId()">$joke.getQuestion()</a></td>
-        <td><a href="/jokes/$joke.getId()">$brand.getStyle()</a></td>
         <td>
          <a href="/jokes/$joke.getId()/up"><span class="glyphicon glyphicon-arrow-up">
            </span></a> $joke.getHilarity()
              <a href="/jokes/$joke.getId()/down"><span class="glyphicon glyphicon-arrow-down">
-               </span></a> </td>    </tr>
+               </span></a> </td>
+        <td><a href="/jokes/$joke.getId()">$joke.getQuestion()</a></td>
+        <td>$joke.getAnswer()</td></tr>
     #end
     </tbody>
   </table>
