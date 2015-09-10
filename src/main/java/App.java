@@ -78,6 +78,15 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
+    post("/categories/add", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      String type = request.queryParams("type");
+      Category newCategory = new Category(type);
+      newCategory.save();
+      response.redirect("/categories");
+      return null;
+    });
+
     post("/", (request, response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
       String type = request.queryParams("type");
@@ -97,6 +106,7 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
+
     post("categories/:id/add-jokes", (request, response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
       int jokeId = Integer.parseInt(request.queryParams("joke_id"));
@@ -108,7 +118,19 @@ public class App {
       return null;
     });
 
-  
+    post("categories/:id/add-new-joke", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      int categoryId = Integer.parseInt(request.queryParams("category_id"));
+      Category category = Category.find(categoryId);
+      String question = request.queryParams("question");
+      String answer = request.queryParams("answer");
+      Joke newJoke = new Joke(question, answer);
+      newJoke.save();
+      response.redirect("/categories/" + categoryId);
+      return null;
+    });
+
+
 
 
     post("/jokes/add", (request, response) -> {
