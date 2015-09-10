@@ -24,10 +24,9 @@ public class Joke {
     return hilarity;
   }
 
-  public Joke(String question, String answer, int hilarity) {
+  public Joke(String question, String answer) {
     this.question = question;
     this.answer = answer;
-    this.hilarity = hilarity;
   }
 
 
@@ -51,11 +50,10 @@ public class Joke {
 
   public void save() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO jokes (question, answer, hilarity) VALUES (:question, :answer, :hilarity)";
+      String sql = "INSERT INTO jokes (question, answer) VALUES (:question, :answer)";
       this.id = (int) con.createQuery(sql, true)
       .addParameter("question", this.question)
       .addParameter("answer", this.answer)
-      .addParameter("hilarity", this.hilarity)
       .executeUpdate()
       .getKey();
     }
@@ -95,16 +93,36 @@ public class Joke {
     }
   }
 
+  public void hilarityDown() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "UPDATE jokes SET hilarity = hilarity - 1 WHERE id = :id";
+      con.createQuery(sql)
+      .addParameter("id", id)
+      .executeUpdate();
+    }
+  }
 
-    public static List<Joke> search(String searchName) {
-      String lowerCaseSearch = searchName.toLowerCase();
-      String sql = "SELECT * FROM students WHERE LOWER (students.name) LIKE '%" + lowerCaseSearch + "%'";
-      List<Joke> studentResults;
+
+    public static List<Joke> searchQuestion(String searchJokeQuestion) {
+      String lowerCaseSearch = searchJokeQuestion.toLowerCase();
+      String sql = "SELECT * FROM jokes WHERE LOWER (jokes.question) LIKE '%" + lowerCaseSearch + "%'";
+      List<Joke> jokeResults;
       try (Connection con = DB.sql2o.open()) {
-        studentResults = con.createQuery(sql)
+        jokeResults = con.createQuery(sql)
           .executeAndFetch(Joke.class);
       }
-      return studentResults;
+      return jokeResults;
+    }
+
+    public static List<Joke> searchAnswer(String searchJokeAnswer) {
+      String lowerCaseSearch = searchJokeAnswer.toLowerCase();
+      String sql = "SELECT * FROM jokes WHERE LOWER (jokes.answer) LIKE '%" + lowerCaseSearch + "%'";
+      List<Joke> jokeResults;
+      try (Connection con = DB.sql2o.open()) {
+        jokeResults = con.createQuery(sql)
+          .executeAndFetch(Joke.class);
+      }
+      return jokeResults;
     }
 
   public void addCategory(Category category) {
