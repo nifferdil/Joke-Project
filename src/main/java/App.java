@@ -78,6 +78,15 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
+    post("/categories/add", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      String type = request.queryParams("type");
+      Category newCategory = new Category(type);
+      newCategory.save();
+      response.redirect("/categories");
+      return null;
+    });
+
     post("/", (request, response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
       String type = request.queryParams("type");
@@ -96,6 +105,7 @@ public class App {
       model.put("template", "templates/category.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
+
 
     post("categories/:id/add-jokes", (request, response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
