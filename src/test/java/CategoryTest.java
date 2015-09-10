@@ -10,27 +10,27 @@ public class CategoryTest {
 
   @Test
   public void category_instantiates_True() {
-    Category testCategory = new Category("Pun", "Spain");
+    Category testCategory = new Category("Pun");
     assertTrue(testCategory instanceof Category);
   }
 
   @Test
   public void equals_returnsTrueIfCategoriesAretheSame_true() {
-    Category firstCategory = new Category("Pun", "Spain");
-    Category secondCategory = new Category("Pun", "Spain");
+    Category firstCategory = new Category("Pun");
+    Category secondCategory = new Category("Pun");
     assertTrue(firstCategory.equals(secondCategory));
   }
 
   @Test
   public void save_savesIntoDatabase_true() {
-    Category myCategory = new Category("Pun", "Spain");
+    Category myCategory = new Category("Pun");
     myCategory.save();
     assertTrue(Category.all().get(0).equals(myCategory));
   }
 
   @Test
   public void find_findCategoryInDatabase_true() {
-    Category myCategory = new Category("Pun", "Spain");
+    Category myCategory = new Category("Pun");
     myCategory.save();
     Category savedCategory = Category.find(myCategory.getId());
     assertTrue(myCategory.equals(savedCategory));
