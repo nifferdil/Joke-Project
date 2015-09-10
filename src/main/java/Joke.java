@@ -86,6 +86,27 @@ public class Joke {
     }
   }
 
+  public void hilarityUp() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "UPDATE jokes SET hilarity = hilarity + 1 WHERE id = :id";
+      con.createQuery(sql)
+      .addParameter("id", id)
+      .executeUpdate();
+    }
+  }
+
+
+    public static List<Joke> search(String searchName) {
+      String lowerCaseSearch = searchName.toLowerCase();
+      String sql = "SELECT * FROM students WHERE LOWER (students.name) LIKE '%" + lowerCaseSearch + "%'";
+      List<Joke> studentResults;
+      try (Connection con = DB.sql2o.open()) {
+        studentResults = con.createQuery(sql)
+          .executeAndFetch(Joke.class);
+      }
+      return studentResults;
+    }
+
   public void addCategory(Category category) {
     try(Connection con = DB.sql2o.open()) {
       String sql = "INSERT INTO jokes_categories (joke_id, category_id) VALUES (:joke_id, :category_id)";
