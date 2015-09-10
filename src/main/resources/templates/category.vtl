@@ -1,0 +1,56 @@
+
+<h2>Welcome to $category.getType() page</h2>
+
+
+#if($category.getJokes().size() != 0)
+<h2>The following jokes are currently assigned to $category.getType():</h2>
+  <table border="1" class="table table-striped">
+    <th>Question</th>
+    <th>Answer</th>
+    <th>Hilarity</th>
+
+    <tbody>
+    #foreach($joke in $category.getJokes())
+      <tr>
+        <td><a href="/jokes/$joke.getId()">$joke.getQuestion()</a></td>
+        <td><a href="/jokes/$joke.getId()">$brand.getStyle()</a></td>
+        <td>
+         <a href="/jokes/$joke.getId()/up"><span class="glyphicon glyphicon-arrow-up">
+           </span></a> $joke.getHilarity()
+             <a href="/jokes/$joke.getId()/down"><span class="glyphicon glyphicon-arrow-down">
+               </span></a> </td>    </tr>
+    #end
+    </tbody>
+  </table>
+#else
+  <h4>Currently this category doesn't have any jokes... Add the first joke to this category! </h4>
+#end
+
+<h3>Add a joke to this category:</h3>
+
+<form action='/categories/$category.getId()/add-jokes' method='post'>
+  <input id="category_id" name="category_id" type="hidden" value="$category.getId()">
+  <label for="joke_id">Select a joke</label>
+  <select id='joke_id' name='joke_id' type='text'>
+    #foreach($joke in $jokes)
+      <option value="$joke.getId()"> $joke.getQuestion()</option>
+    #end
+  </select>
+  <button type='submit'>Add joke</button>
+</form>
+
+<h4>Don't see the you like in the list? Add a completely new joke!<a href='/jokes'> here</a></h4>
+
+<form action="/jokes" method="post">
+  <input id="categoryId" name="categoryId" type="hidden" value="$category.getId()">
+
+  <div class="form-group">
+    <label for="question">Add joke: (Max 8000 characters)</label>
+    <input id="question" name="question" type="text" class="form-control">
+    <br>
+    <label for="answer">Add punchline (optional)</label>
+    <input id="answer" name="answer" type="text" class="form-control">
+  </div>
+
+  <button type="submit" class="btn btn-success">Add joke</button>
+</form>

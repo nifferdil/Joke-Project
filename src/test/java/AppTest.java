@@ -28,5 +28,14 @@ public class AppTest extends FluentTest {
     assertThat(pageSource().contains("Knee Slappers"));
   }
 
+  @Test
+  public void categoryIsDisplayedOnItsPage() {
+    Category category = new Category("Category");
+    category.save();
+    String categoryPath = String.format("http://localhost:4567/categories/%d", category.getId());
+    goTo(categoryPath);
+    assertThat(pageSource()).contains("Welcome to Category page");
+  }
+
 
   }
