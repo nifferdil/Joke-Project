@@ -42,6 +42,15 @@ public class JokeTest {
     myJoke.delete();
     assertEquals(Joke.all().size(), 0);
   }
+
+  @Test
+  public void hilarityUp_IncreasesHilarityRatingByOne() {
+    Joke myJoke = new Joke("What does a ghost eat for breakfast?", "booberries");
+    myJoke.save();
+    myJoke.hilarityUp();
+    assertEquals(1, Joke.all().get(0).getHilarity());
+  }
+
  //
  //  @Test
  // public void addCategory_addsCategoryToJoke() {

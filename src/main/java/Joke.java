@@ -69,6 +69,15 @@ public class Joke {
     }
   }
 
+  public void hilarityUp() {
+   try(Connection con = DB.sql2o.open()) {
+     String sql = "UPDATE jokes SET hilarity = hilarity + 1 WHERE id = :id";
+     con.createQuery(sql)
+     .addParameter("id", id)
+     .executeUpdate();
+   }
+ }
+
 
   public void delete() {
     try(Connection con = DB.sql2o.open()) {
