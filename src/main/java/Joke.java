@@ -24,10 +24,9 @@ public class Joke {
     return hilarity;
   }
 
-  public Joke(String question, String answer, int hilarity) {
+  public Joke(String question, String answer) {
     this.question = question;
     this.answer = answer;
-    this.hilarity = hilarity;
   }
 
 
@@ -51,11 +50,10 @@ public class Joke {
 
   public void save() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO jokes (question, answer, hilarity) VALUES (:question, :answer, :hilarity)";
+      String sql = "INSERT INTO jokes (question, answer) VALUES (:question, :answer)";
       this.id = (int) con.createQuery(sql, true)
       .addParameter("question", this.question)
       .addParameter("answer", this.answer)
-      .addParameter("hilarity", this.hilarity)
       .executeUpdate()
       .getKey();
     }

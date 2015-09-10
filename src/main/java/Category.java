@@ -5,7 +5,6 @@ import java.util.ArrayList;
 public class Category {
   private int id;
   private String type;
-  private String region;
 
   public int getId() {
     return id;
@@ -14,14 +13,9 @@ public class Category {
   public String getType() {
     return type;
   }
-
-  public String getRegion() {
-    return region;
-  }
-
-  public Category(String type, String region) {
+  
+  public Category(String type) {
     this.type = type;
-    this.region = region;
   }
 
   @Override
@@ -30,8 +24,7 @@ public class Category {
       return false;
     } else {
       Category newCategory = (Category) otherCategory;
-      return this.getType().equals(newCategory.getType()) &&
-             this.getRegion().equals(newCategory.getRegion());
+      return this.getType().equals(newCategory.getType());
     }
   }
 
@@ -44,10 +37,9 @@ public class Category {
 
   public void save() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO categories(type, region) VALUES (:type, :region)";
+      String sql = "INSERT INTO categories(type) VALUES (:type)";
       this.id = (int) con.createQuery(sql, true)
       .addParameter("type", this.type)
-      .addParameter("region", this.region)
       .executeUpdate()
       .getKey();
     }
@@ -98,16 +90,6 @@ public class Category {
       String sql = "UPDATE categories SET type = :type WHERE id = :id";
       con.createQuery(sql)
       .addParameter("type", type)
-      .addParameter("id", id)
-      .executeUpdate();
-    }
-  }
-
-  public void updateRegion(String type) {
-    try(Connection con = DB.sql2o.open()) {
-      String sql = "UPDATE categories SET region = :region WHERE id = :id";
-      con.createQuery(sql)
-      .addParameter("region", region)
       .addParameter("id", id)
       .executeUpdate();
     }
