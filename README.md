@@ -1,12 +1,12 @@
-# _Joke Project_
+# _Knee Slappers_
 
-##### A joke machine. Date of current version: 09/09/15
+##### A joke machine with hilarity rating. Date of current version: 09/10/15
 
 #### By **Nataliya Bareeva-Miller, Aimee Reiss, Jennifer Morkunas, and Diana Holland**
 
 ## Description
 
-In this little joke machine, you can create a database of jokes, and lend these jokes out to friends. No one wants to hear jokes over and over again, and this app helps to solve that problem! The database can support jokes with multiple categories, and categories with multiple jokes. We are currently building functionality for users check out the jokes.
+In this joke machine, you can add your favorite jokes, and then rate other jokes. Sometimes it's hard to know when a joke is funny or not, and this app helps solve that problem! The database can support jokes with multiple categories, and categories with multiple jokes.
 
 ## Setup
 
@@ -18,13 +18,13 @@ In this little joke machine, you can create a database of jokes, and lend these 
 
 **To use the database included with this file, follow these instructions:**
 
-* Clone this git repository on your computer ```git clone https://github.com/theholla/joke-project.git```
+* Clone this git repository on your computer ```git clone https://github.com/nifferdil/Joke-Project.git```
 * In terminal, start the PostgreSQL server by typing ```postgres``` and ```psql```
-* In psql, create a new database by typing ```CREATE DATABASE joke-machine;```
+* In psql, create a new database by typing ```CREATE DATABASE knee_slappers;```
 * In another tab in terminal, connect to this project folder: ```cd path/to/this/folder```
 * In this tab, dump the database information from our sql file into your local database by typing the following code: ```psql knee_slappers < knee_slappers.sql```
 
-* To run tests, you can create a new test database in psql: ```CREATE DATABASE  knee_slappers_test WITH TEMPLATE knee_slappers;```
+* To run tests, you can create a new test database in psql: ```CREATE DATABASE knee_slappers_test WITH TEMPLATE knee_slappers;```
 
 ## Database Schema
 
@@ -32,7 +32,7 @@ In this little joke machine, you can create a database of jokes, and lend these 
 
 ## Technologies Used
 
-Java, Apache Spark and Velocity templates, PostgreSQL Database, HTML5, and CSS
+Java, Apache Spark and Velocity templates, PostgreSQL Database, HTML5, and CSS3
 
 ### Legal
 
