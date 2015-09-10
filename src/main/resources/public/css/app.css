@@ -1,5 +1,5 @@
 body {
-  background-color: ##F2F2F2;}
+  background-color: #F2F2F2;}
 
 a {
   color: #FF1563 !important;}
@@ -15,8 +15,10 @@ a {
   width: 20px;}
 
 .head {
-  background-color: #FF1563;
-}
+  background-color: #FF1563;}
+
+.headbox {
+  back-ground-color: #CAC66C;}
 
 ul.navigation {
   width: 570px;
