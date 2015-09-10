@@ -1,0 +1,66 @@
+
+
+<h1>Search Results:</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Joke Question</th>
+      <th>View</th>
+    </tr>
+  </thead>
+  <tbody>
+    #foreach ($joke in $jokes)
+      <tr>
+        <td>$joke.getQuestion()</td>
+        <td>
+          <a href="/joke/$joke.getId()" method="get" class="btn btn-warning">View</a>
+        </td>
+      </tr>
+    #end
+  </tbody>
+</table>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Joke Answer</th>
+      <th>View</th>
+    </tr>
+  </thead>
+  <tbody>
+    #foreach ($jokes in $jokes)
+      <tr>
+        <td>$jokes.getAnswer()</td>
+        <td>
+          <form action="/jokes/$jokes.getId()">
+            <button class="btn btn-warning" type="submit">View</button>
+          </form>
+        </td>
+      </tr>
+    #end
+  </tbody>
+</table>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Professor Name</th>
+      <th>Professor ID</th>
+      <th>Department</th>
+      <th>View &amp; Update</th>
+    </tr>
+  </thead>
+  <tbody>
+    #foreach ($professor in $professors)
+      <tr>
+        <td>$professor.getName()</td>
+        <td>$professor.getId()</td>
+        <td>$professor.getDepartment()</td>
+        <td>
+          <a href="/professor/$professor.getId()" method="get" class="btn btn-warning">View &amp; Update</a>
+        </td>
+      </tr>
+    #end
+  </tbody>
+</table>

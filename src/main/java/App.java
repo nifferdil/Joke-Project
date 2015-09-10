@@ -8,25 +8,35 @@ import static spark.Spark.*;
 
 public class App {
   public static void main(String[] args) {
-    ProcessBuilder process = new ProcessBuilder();
-    Integer port;
-    if (process.environment().get("PORT") != null) {
-      port = Integer.parseInt(process.environment().get("PORT"));
-    } else {
-      port = 4567;
-    }
-    setPort(port);
+    // ProcessBuilder process = new ProcessBuilder();
+    // Integer port;
+    // if (process.environment().get("PORT") != null) {
+    //   port = Integer.parseInt(process.environment().get("PORT"));
+    // } else {
+    //   port = 4567;
+    // }
+    // setPort(port);
     staticFileLocation("/public");
     String layout = "templates/layout.vtl";
 
     /* Index */
     get("/", (request, response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
-      model.put("categories", Category.all());
-      model.put("jokes", Joke.all());
+      // model.put("categories", Category.all());
+      // model.put("jokes", Joke.all());
       model.put("template", "templates/index.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
+
+    // get("/search/results", (request, response) -> {
+    //   HashMap<String, Object> model = new HashMap<String, Object>();
+    //   String mainSearch = request.queryParams("main-search");
+    //   model.put("questions", Joke.searchQuestion(mainSearch));
+    //   model.put("answers", Joke.searchAnswer(mainSearch));
+    //   model.put("categories", Category.search(mainSearch));
+    //   model.put("template", "templates/search_results.vtl");
+    //   return new ModelAndView(model, layout);
+    // }, new VelocityTemplateEngine());
 
     /* Index --> list of Jokes */
     get("/jokes", (request, response) -> {
@@ -53,7 +63,7 @@ public class App {
       String answer = request.queryParams("answer");
       Joke newJoke = new Joke(question, answer);
       newJoke.save();
-      response.redirect("/");
+      response.redirect("/jokes");
       return null;
     });
 
