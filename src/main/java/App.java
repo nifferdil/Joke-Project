@@ -108,7 +108,19 @@ public class App {
       return null;
     });
 
-  
+    post("categories/:id/add-new-joke", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      int categoryId = Integer.parseInt(request.queryParams("category_id"));
+      Category category = Category.find(categoryId);
+      String question = request.queryParams("question");
+      String answer = request.queryParams("answer");
+      Joke newJoke = new Joke(question, answer);
+      newJoke.save();
+      response.redirect("/categories/" + categoryId);
+      return null;
+    });
+
+
 
 
     post("/jokes/add", (request, response) -> {

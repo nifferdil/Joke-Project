@@ -13,11 +13,12 @@
     #foreach($joke in $category.getJokes())
       <tr>
         <td><a href="/jokes/$joke.getId()">$joke.getQuestion()</a></td>
-        <td><a href="/jokes/$joke.getId()">$brand.getStyle()</a></td>
+        <td><a href="/jokes/$joke.getId()">$joke.getAnswer()</a></td>
+
         <td>
-         <a href="/jokes/$joke.getId()/up"><span class="glyphicon glyphicon-arrow-up">
+         <a href="/jokes/$joke.getId()/up"><span class="glyphicon glyphicon-thumbs-up">
            </span></a> $joke.getHilarity()
-             <a href="/jokes/$joke.getId()/down"><span class="glyphicon glyphicon-arrow-down">
+             <a href="/jokes/$joke.getId()/down"><span class="glyphicon glyphicon-thumbs-down">
                </span></a> </td>    </tr>
     #end
     </tbody>
@@ -39,10 +40,9 @@
   <button type='submit'>Add joke</button>
 </form>
 
-<h4>Don't see the you like in the list? Add a completely new joke!<a href='/jokes'> here</a></h4>
 
-<form action="/jokes" method="post">
-  <input id="categoryId" name="categoryId" type="hidden" value="$category.getId()">
+<form action="/categories/$category.getId()/add-new-joke" method="post">
+  <input id="category_id" name="category_id" type="hidden" value="$category.getId()">
 
   <div class="form-group">
     <label for="question">Add joke: (Max 8000 characters)</label>
