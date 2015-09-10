@@ -37,7 +37,7 @@ public class Category {
 
   public void save() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO categories type VALUES :type";
+      String sql = "INSERT INTO categories(type) VALUES (:type)";
       this.id = (int) con.createQuery(sql, true)
       .addParameter("type", this.type)
       .executeUpdate()
@@ -93,6 +93,18 @@ public class Category {
       .addParameter("id", id)
       .executeUpdate();
     }
+  }
+
+
+  public static List<Category> search(String searchCategory) {
+    String lowerCaseSearch = searchCategory.toLowerCase();
+    String sql = "SELECT * FROM categories WHERE LOWER (categories.type) LIKE '%" + lowerCaseSearch + "%'";
+    List<Category> categoryResults;
+    try (Connection con = DB.sql2o.open()) {
+      categoryResults = con.createQuery(sql)
+        .executeAndFetch(Category.class);
+    }
+    return categoryResults;
   }
 
   public void delete() {

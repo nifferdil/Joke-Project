@@ -37,10 +37,18 @@ public class CategoryTest {
   }
 
   @Test
-  public void addJoke_addsJokeToCategory() {
-    Category myCategory = new Category("Riddle", "Holiday");
+  public void search_filtersCategories() {
+    Category myCategory = new Category("Pun");
     myCategory.save();
-    Joke myJoke = new Joke("Knock Knock", "Orange you glad", 1);
+    List searchResult = Category.search("Pun");
+    assertTrue(myCategory.equals(searchResult.get(0)));
+  }
+
+  @Test
+  public void addJoke_addsJokeToCategory() {
+    Category myCategory = new Category("Riddle");
+    myCategory.save();
+    Joke myJoke = new Joke("Knock Knock", "Orange you glad");
     myJoke.save();
     myCategory.addJoke(myJoke);
     Joke savedJoke = myCategory.getJokes().get(0);
@@ -49,9 +57,9 @@ public class CategoryTest {
 
   @Test
   public void getJokes_returnsAllJokes_ArrayList() {
-    Category myCategory = new Category("Riddle", "Holiday");
+    Category myCategory = new Category("Riddle");
     myCategory.save();
-    Joke myJoke = new Joke("Knock Knock", "Orange you glad", 1);
+    Joke myJoke = new Joke("Knock Knock", "Orange you glad");
     myJoke.save();
     myCategory.addJoke(myJoke);
     List savedJokes = myCategory.getJokes();
@@ -59,14 +67,21 @@ public class CategoryTest {
   }
 
   @Test
-  public void delete_deletesAllJokesAndListAssoications() {
-    Category myCategory = new Category("Riddle", "Holiday");
+  public void delete_deletesAllJokesAndListAssociations() {
+    Category myCategory = new Category("Riddle");
     myCategory.save();
-    Joke myJoke = new Joke("Knock Knock", "Orange you glad", 1);
+    Joke myJoke = new Joke("Knock Knock", "Orange you glad");
     myJoke.save();
     myCategory.addJoke(myJoke);
     myCategory.delete();
     assertEquals(myJoke.getCategories().size(), 0);
   }
 
+  @Test
+  public void updateType_changesType() {
+    Category myCategory = new Category("Riddle");
+    myCategory.save();
+    myCategory.updateType("Family");
+    assertEquals("Family", Category.all().get(0).getType());
+  }
 }
