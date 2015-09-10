@@ -1,9 +1,15 @@
-<h2>Knee Slappers</h2>
+<!-- New Joke Form -->
 
-<div class='container-fluid'>
-  <div class='row'>
+<h3>Add a joke to make someone smile.</h3>
 
-stuff!
-
+<form action="/jokes/add" method="post">
+  <div class="form-group">
+    <label for="question">Joke</label>
+    <input id="question" name="question" type="text" class="form-control" placeholder="When is a bicycle not a bicycle?">
+    <br>
+    <label for="answer">Punchline (optional)</label>
+    <input id="answer" name="answer" type="text" class="form-control" placeholder="When it turns into a driveway!">
   </div>
-</div>
+
+  <button type="submit" class="btn btn-default">Add joke</button>
+</form>

@@ -42,7 +42,7 @@ public class Joke {
 
 
   public static List<Joke> all() {
-    String sql = "SELECT * FROM jokes";
+    String sql = "SELECT * FROM jokes ORDER BY hilarity DESC";
     try(Connection con = DB.sql2o.open()) {
       return con.createQuery(sql).executeAndFetch(Joke.class);
     }
