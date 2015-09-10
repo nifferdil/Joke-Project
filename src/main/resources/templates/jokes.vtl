@@ -1,0 +1,29 @@
+#foreach $joke in $jokes
+
+<ul>
+  <li>$joke.getQuestion()</li>
+  <li>$joke.getAnswer()</li>
+  <li>$joke.getHilarity()</li>
+  <hr>
+</ul>
+#end
+
+
+<a href="/"><span class="glyphicon glyphicon-thumbs-up"></span></a>
+<a href="/"><span class="glyphicon glyphicon-thumbs-down"></span></a>
+
+<p>Know another great joke? Add it to our list:</p>
+<br>
+<form action="/jokes/add" method="post">
+  <input id="categoryId" name="categoryId" type="hidden" value="$category.getId()">
+
+  <div class="form-group">
+    <label for="question">Add joke: (Max 8000 characters)</label>
+    <input id="question" name="question" type="text" class="form-control">
+    <br>
+    <label for="answer">Add punchline (optional)</label>
+    <input id="answer" name="answer" type="text" class="form-control">
+  </div>
+
+  <button type="submit" class="btn btn-success">Add joke</button>
+</form>
