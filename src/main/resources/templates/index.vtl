@@ -1,1 +1,36 @@
-<h1>Knee Slappers</h1>
+<h2>Knee Slappers</h2>
+
+<div class='container-fluid'>
+  <div class='row'>
+
+    <!-- Stores column -->
+
+    <div class='col-sm-6'>
+      <div class='box padding center'>
+        #if ($stores.size() < 2)
+          <!-- <img class='center' alt='sad shoebox' src='img/shoebox_sad'> -->
+          <h3>Your shoebox looks lonely. Care to add a few stores?</h3>
+          <h3><a href='/stores'>add a store<span class='glyphicon glyphicon-chevron-right'></span></a></h3>
+          #else
+          <h3>this shoebox contains $stores.size() stores</h3>
+          <h3><a href='/stores'>see your stores<span class='glyphicon glyphicon-chevron-right'></span></a></h3>
+        #end
+      </div>
+    </div>
+
+  <!-- Brands column -->
+
+    <div class='col-sm-6'>
+      <div class='box padding center'>
+        #if ($brands.size() < 2)
+          <h3>Have a favorite brand? Add it to your shoebox!</h3>
+          <h3><a href='/brands'>add a brand<span class='glyphicon glyphicon-chevron-right'></span></a></h3>
+          #else
+          <h3>there are $brands.size() brands in your shoebox</h3>
+          <h3><a href='/brands'>see your brands<span class='glyphicon glyphicon-chevron-right'></span></a></h3>
+        #end
+      </div>
+    </div>
+
+  </div>
+</div>

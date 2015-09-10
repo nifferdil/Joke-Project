@@ -13,7 +13,7 @@ public class Category {
   public String getType() {
     return type;
   }
-  
+
   public Category(String type) {
     this.type = type;
   }
@@ -48,10 +48,10 @@ public class Category {
   public static Category find(int id) {
     try(Connection con = DB.sql2o.open()) {
       String sql = "SELECT * FROM categories WHERE id=:id";
-      Category Category = con.createQuery(sql)
+      Category category = con.createQuery(sql)
       .addParameter("id", id)
       .executeAndFetchFirst(Category.class);
-      return Category;
+      return category;
     }
   }
 
@@ -75,7 +75,7 @@ public class Category {
       ArrayList<Joke> jokes = new ArrayList<Joke>();
 
       for (Integer jokeId : jokeIds) {
-        String jokeQuery = "Select * From jokes WHERE id = :jokeId";
+        String jokeQuery = "Select * FROM jokes WHERE id = :jokeId";
         Joke joke = con.createQuery(jokeQuery)
         .addParameter("jokeId", jokeId)
         .executeAndFetchFirst(Joke.class);

@@ -1,10 +1,36 @@
+body {
+  background-color: #efefef;}
+
+a {
+  color: #00A2AB !important;}
+
+.box {
+  border: 6px solid #411D63;
+  -moz-border-radius: 8px;
+  border-radius: 6px;}
+
+.padding {
+  margin: 10px;
+  padding: 15px;}
+
+.margin {
+  margin: 10px;}
+
+.center {
+  text-align: center;}
+
 img.center {
   display: block;
   margin-left: auto;
-  margin-right: auto;
-}
+  margin-right: auto;}
+
+img {
+  max-width: 100%;
+  height: auto;}
 
 .glyphicon {
   margin-right: 5px;
-  margin-left: 5px;
-}
+  margin-left: 5px;}
+
+#company, #phone, #address {
+  background-color: #;}
