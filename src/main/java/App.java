@@ -72,11 +72,43 @@ public class App {
     /* Index --> list of Categorys */
     get("/categories", (request, response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
-      model.put("jokes", Joke.all());
+      // model.put("jokes", Joke.all());
       model.put("categories", Category.all());
       model.put("template", "/templates/categories.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
+
+    post("/", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      String type = request.queryParams("type");
+      Category newCategory = new Category(type);
+      newCategory.save();
+      response.redirect("/categories");
+      return null;
+    });
+
+    get("/categories/:id", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      int id = Integer.parseInt(request.params("id"));
+      Category category = Category.find(id);
+      model.put("category", category);
+      model.put("jokes", Joke.all());
+      model.put("template", "templates/category.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    post("categories/:id/add-jokes", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      int jokeId = Integer.parseInt(request.queryParams("joke_id"));
+      int categoryId = Integer.parseInt(request.queryParams("category_id"));
+      Category category = Category.find(categoryId);
+      Joke joke = Joke.find(jokeId);
+      category.addJoke(joke);
+      response.redirect("/categories/" + categoryId);
+      return null;
+    });
+
+  
 
 
     post("/jokes/add", (request, response) -> {
