@@ -46,7 +46,6 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
-  }
 
     post("/", (request, response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
@@ -56,7 +55,7 @@ public class App {
       newJoke.save();
       response.redirect("/");
       return null;
-    })
+    });
 
-  
+  }
 }

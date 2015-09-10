@@ -15,21 +15,21 @@ public class JokeTest {
 
   @Test
   public void equals_returnsTrueIfQuestionsAretheSame() {
-    Joke firstJoke = new Joke("What does a ghost eat for breakfast?", "booberries", 3);
-    Joke secondJoke = new Joke("What does a ghost eat for breakfast?", "booberries", 3);
+    Joke firstJoke = new Joke("What does a ghost eat for breakfast?", "booberries");
+    Joke secondJoke = new Joke("What does a ghost eat for breakfast?", "booberries");
     assertTrue(firstJoke.equals(secondJoke));
   }
 
   @Test
   public void save_savesIntoDatabase_true() {
-    Joke myJoke = new Joke("What does a ghost eat for breakfast?", "booberries", 3);
+    Joke myJoke = new Joke("What does a ghost eat for breakfast?", "booberries");
     myJoke.save();
     assertTrue(Joke.all().get(0).equals(myJoke));
   }
 
   @Test
   public void find_findOneQuestionInJoke() {
-    Joke myJoke = new Joke("What does a ghost eat for breakfast?", "booberries", 3);
+    Joke myJoke = new Joke("What does a ghost eat for breakfast?", "booberries");
     myJoke.save();
     Joke savedJoke = Joke.find(myJoke.getId());
     assertTrue(myJoke.equals(savedJoke));
@@ -37,7 +37,7 @@ public class JokeTest {
 
   @Test
   public void delete_deleteQuestionFromJoke() {
-    Joke myJoke = new Joke("What does a ghost eat for breakfast?", "booberries", 3);
+    Joke myJoke = new Joke("What does a ghost eat for breakfast?", "booberries");
     myJoke.save();
     myJoke.delete();
     assertEquals(Joke.all().size(), 0);

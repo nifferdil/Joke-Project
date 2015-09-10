@@ -30,7 +30,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: categories; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
+-- Name: categories; Type: TABLE; Schema: public; Owner: nataliyamiller; Tablespace: 
 --
 
 CREATE TABLE categories (
@@ -39,10 +39,10 @@ CREATE TABLE categories (
 );
 
 
-ALTER TABLE categories OWNER TO "Guest";
+ALTER TABLE categories OWNER TO nataliyamiller;
 
 --
--- Name: categories_id_seq; Type: SEQUENCE; Schema: public; Owner: Guest
+-- Name: categories_id_seq; Type: SEQUENCE; Schema: public; Owner: nataliyamiller
 --
 
 CREATE SEQUENCE categories_id_seq
@@ -53,31 +53,31 @@ CREATE SEQUENCE categories_id_seq
     CACHE 1;
 
 
-ALTER TABLE categories_id_seq OWNER TO "Guest";
+ALTER TABLE categories_id_seq OWNER TO nataliyamiller;
 
 --
--- Name: categories_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Guest
+-- Name: categories_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: nataliyamiller
 --
 
 ALTER SEQUENCE categories_id_seq OWNED BY categories.id;
 
 
 --
--- Name: jokes; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
+-- Name: jokes; Type: TABLE; Schema: public; Owner: nataliyamiller; Tablespace: 
 --
 
 CREATE TABLE jokes (
     id integer NOT NULL,
-    hilarity integer,
+    hilarity integer DEFAULT 0,
     question character varying,
     answer character varying
 );
 
 
-ALTER TABLE jokes OWNER TO "Guest";
+ALTER TABLE jokes OWNER TO nataliyamiller;
 
 --
--- Name: jokes_categories; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
+-- Name: jokes_categories; Type: TABLE; Schema: public; Owner: nataliyamiller; Tablespace: 
 --
 
 CREATE TABLE jokes_categories (
@@ -87,10 +87,10 @@ CREATE TABLE jokes_categories (
 );
 
 
-ALTER TABLE jokes_categories OWNER TO "Guest";
+ALTER TABLE jokes_categories OWNER TO nataliyamiller;
 
 --
--- Name: jokes_categories_id_seq; Type: SEQUENCE; Schema: public; Owner: Guest
+-- Name: jokes_categories_id_seq; Type: SEQUENCE; Schema: public; Owner: nataliyamiller
 --
 
 CREATE SEQUENCE jokes_categories_id_seq
@@ -101,17 +101,17 @@ CREATE SEQUENCE jokes_categories_id_seq
     CACHE 1;
 
 
-ALTER TABLE jokes_categories_id_seq OWNER TO "Guest";
+ALTER TABLE jokes_categories_id_seq OWNER TO nataliyamiller;
 
 --
--- Name: jokes_categories_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Guest
+-- Name: jokes_categories_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: nataliyamiller
 --
 
 ALTER SEQUENCE jokes_categories_id_seq OWNED BY jokes_categories.id;
 
 
 --
--- Name: jokes_id_seq; Type: SEQUENCE; Schema: public; Owner: Guest
+-- Name: jokes_id_seq; Type: SEQUENCE; Schema: public; Owner: nataliyamiller
 --
 
 CREATE SEQUENCE jokes_id_seq
@@ -122,53 +122,66 @@ CREATE SEQUENCE jokes_id_seq
     CACHE 1;
 
 
-ALTER TABLE jokes_id_seq OWNER TO "Guest";
+ALTER TABLE jokes_id_seq OWNER TO nataliyamiller;
 
 --
--- Name: jokes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Guest
+-- Name: jokes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: nataliyamiller
 --
 
 ALTER SEQUENCE jokes_id_seq OWNED BY jokes.id;
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: Guest
+-- Name: id; Type: DEFAULT; Schema: public; Owner: nataliyamiller
 --
 
 ALTER TABLE ONLY categories ALTER COLUMN id SET DEFAULT nextval('categories_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: Guest
+-- Name: id; Type: DEFAULT; Schema: public; Owner: nataliyamiller
 --
 
 ALTER TABLE ONLY jokes ALTER COLUMN id SET DEFAULT nextval('jokes_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: Guest
+-- Name: id; Type: DEFAULT; Schema: public; Owner: nataliyamiller
 --
 
 ALTER TABLE ONLY jokes_categories ALTER COLUMN id SET DEFAULT nextval('jokes_categories_id_seq'::regclass);
 
 
 --
--- Data for Name: categories; Type: TABLE DATA; Schema: public; Owner: Guest
+-- Data for Name: categories; Type: TABLE DATA; Schema: public; Owner: nataliyamiller
 --
 
 COPY categories (id, type) FROM stdin;
+1	Animal Jokes
+3	Food Jokes
+4	Office Jokes
+6	Sport Jokes
+7	Technology Jokes
+8	Holiday Jokes
+9	Miscellaneous Jokes
+10	Yo Momma Jokes
+11	Dark Humor
+12	Money
+5	School Laughing
+2	Family Teasers
+13	Simply Silly!
 \.
 
 
 --
--- Name: categories_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
+-- Name: categories_id_seq; Type: SEQUENCE SET; Schema: public; Owner: nataliyamiller
 --
 
-SELECT pg_catalog.setval('categories_id_seq', 1, false);
+SELECT pg_catalog.setval('categories_id_seq', 13, true);
 
 
 --
--- Data for Name: jokes; Type: TABLE DATA; Schema: public; Owner: Guest
+-- Data for Name: jokes; Type: TABLE DATA; Schema: public; Owner: nataliyamiller
 --
 
 COPY jokes (id, hilarity, question, answer) FROM stdin;
@@ -176,7 +189,7 @@ COPY jokes (id, hilarity, question, answer) FROM stdin;
 
 
 --
--- Data for Name: jokes_categories; Type: TABLE DATA; Schema: public; Owner: Guest
+-- Data for Name: jokes_categories; Type: TABLE DATA; Schema: public; Owner: nataliyamiller
 --
 
 COPY jokes_categories (id, joke_id, category_id) FROM stdin;
@@ -184,21 +197,21 @@ COPY jokes_categories (id, joke_id, category_id) FROM stdin;
 
 
 --
--- Name: jokes_categories_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
+-- Name: jokes_categories_id_seq; Type: SEQUENCE SET; Schema: public; Owner: nataliyamiller
 --
 
 SELECT pg_catalog.setval('jokes_categories_id_seq', 1, false);
 
 
 --
--- Name: jokes_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
+-- Name: jokes_id_seq; Type: SEQUENCE SET; Schema: public; Owner: nataliyamiller
 --
 
-SELECT pg_catalog.setval('jokes_id_seq', 1, false);
+SELECT pg_catalog.setval('jokes_id_seq', 1, true);
 
 
 --
--- Name: categories_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace: 
+-- Name: categories_pkey; Type: CONSTRAINT; Schema: public; Owner: nataliyamiller; Tablespace: 
 --
 
 ALTER TABLE ONLY categories
@@ -206,7 +219,7 @@ ALTER TABLE ONLY categories
 
 
 --
--- Name: jokes_categories_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace: 
+-- Name: jokes_categories_pkey; Type: CONSTRAINT; Schema: public; Owner: nataliyamiller; Tablespace: 
 --
 
 ALTER TABLE ONLY jokes_categories
@@ -214,7 +227,7 @@ ALTER TABLE ONLY jokes_categories
 
 
 --
--- Name: jokes_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace: 
+-- Name: jokes_pkey; Type: CONSTRAINT; Schema: public; Owner: nataliyamiller; Tablespace: 
 --
 
 ALTER TABLE ONLY jokes
@@ -222,12 +235,12 @@ ALTER TABLE ONLY jokes
 
 
 --
--- Name: public; Type: ACL; Schema: -; Owner: epicodus
+-- Name: public; Type: ACL; Schema: -; Owner: nataliyamiller
 --
 
 REVOKE ALL ON SCHEMA public FROM PUBLIC;
-REVOKE ALL ON SCHEMA public FROM epicodus;
-GRANT ALL ON SCHEMA public TO epicodus;
+REVOKE ALL ON SCHEMA public FROM nataliyamiller;
+GRANT ALL ON SCHEMA public TO nataliyamiller;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
