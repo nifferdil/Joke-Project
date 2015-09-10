@@ -37,6 +37,14 @@ public class CategoryTest {
   }
 
   @Test
+  public void search_filtersCategories() {
+    Category myCategory = new Category("Pun");
+    myCategory.save();
+    List searchResult = Category.search("Pun");
+    assertTrue(myCategory.equals(searchResult.get(0)));
+  }
+
+  @Test
   public void addJoke_addsJokeToCategory() {
     Category myCategory = new Category("Riddle");
     myCategory.save();

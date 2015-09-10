@@ -13,7 +13,7 @@ public class Category {
   public String getType() {
     return type;
   }
-  
+
   public Category(String type) {
     this.type = type;
   }
@@ -93,6 +93,17 @@ public class Category {
       .addParameter("id", id)
       .executeUpdate();
     }
+  }
+
+  public static List<Category> search(String searchCategory) {
+    String lowerCaseSearch = searchCategory.toLowerCase();
+    String sql = "SELECT * FROM categories WHERE LOWER (categories.type) LIKE '%" + lowerCaseSearch + "%'";
+    List<Category> categoryResults;
+    try (Connection con = DB.sql2o.open()) {
+      categoryResults = con.createQuery(sql)
+        .executeAndFetch(Category.class);
+    }
+    return categoryResults;
   }
 
   public void delete() {
