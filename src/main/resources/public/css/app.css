@@ -1,9 +1,17 @@
 body {
-  background-color: #FFE135;
-/*background-image: url('/img/bg.png')*/}
+  background-color: #FFE135;}
 
 a {
-  color: #FF1563 !important;}
+  color: #35B8FF !important;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 1.5px;}
+
+a:hover {
+  background-color: #35B8FF !important;
+  text-transform: uppercase;
+  color: #fff !important;}
+
 
 #banana {
   background-image: url('/img/banana_tiny.png');
@@ -16,7 +24,7 @@ a {
   width: 20px;}
 
 .head {
-  background-color: #FF1563;}
+  background-color: #35B8FF;}
 
 ul.navigation {
   width: 570px;
@@ -25,20 +33,14 @@ ul.navigation {
   border-top: 2px solid #000;
   border-bottom: 1px solid #000}
 
-.main {
-  background color: #f2f2f2;
-  border: 1px solid black;
+#main {
+  background-color: #fff;
+  border: 3px solid #35B8FF;
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
-  border-radius: 6px;}
-}
-
-.padding {
-  margin: 10px;
-  padding: 15px;}
-
-.margin {
-  margin: 10px;}
+  border-radius: 6px;
+  padding-bottom: 100%;
+  margin-bottom: -100%;}
 
 .center {
   text-align: center;}
@@ -52,9 +54,25 @@ img {
   max-width: 100%;
   height: auto;}
 
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary {
+  background-color: #35B8FF;
+  border-color: #35B8FF;}
+
+.btn  {
+  background-color: #FF1563;
+  border-color: #FF1563;
+  color: white;}
+
 .glyphicon {
   margin-right: 5px;
   margin-left: 5px;}
 
-#type, #region {
+#question, #answer {
   background-color: #;}
+
+.well {
+  background: #35B8FF;}
+
+h2 {
+  color: white;
+  text-align: center;}

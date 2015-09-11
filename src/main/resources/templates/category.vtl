@@ -3,21 +3,21 @@
 
 
 #if($category.getJokes().size() != 0)
-<h2>The following jokes are currently assigned to $category.getType():</h2>
-  <table border="1" class="table table-striped">
+<h2>$category.getType():</h2>
+  <table border="0" class="table table-striped">
+    <th></th>
     <th>Question</th>
     <th>Answer</th>
-    <th>Hilarious?</th>
 
     <tbody>
     #foreach($joke in $category.getJokes())
       <tr>
+        <td><a href="/jokes/$joke.getId()/up"><span class="glyphicon glyphicon-thumbs-up">
+          </span></a> $joke.getHilarity()
+            <a href="/jokes/$joke.getId()/down"><span class="glyphicon glyphicon-thumbs-down">
+              </span></a> </td>
           <td>$joke.getQuestion()</td>
           <td>$joke.getAnswer()</td>
-         <td><a href="/jokes/$joke.getId()/up"><span class="glyphicon glyphicon-thumbs-up">
-           </span></a> $joke.getHilarity()
-             <a href="/jokes/$joke.getId()/down"><span class="glyphicon glyphicon-thumbs-down">
-               </span></a> </td>
       </tr>
     #end
     </tbody>
@@ -51,5 +51,5 @@
     <input id="answer" name="answer" type="text" class="form-control">
   </div>
 
-  <button type="submit" class="btn btn-success">Add joke</button>
+  <button type="submit" class="btn btn-primary">Add joke</button>
 </form>
