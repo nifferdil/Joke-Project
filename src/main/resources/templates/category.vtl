@@ -5,9 +5,9 @@
 #if($category.getJokes().size() != 0)
 <h2>The following jokes are currently assigned to $category.getType():</h2>
   <table border="1" class="table table-striped">
-    <th>Hilarious?</th>
     <th>Question</th>
     <th>Answer</th>
+    <th>Hilarious?</th>
 
     <tbody>
     #foreach($joke in $category.getJokes())
