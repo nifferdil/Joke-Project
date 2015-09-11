@@ -67,7 +67,7 @@ public class Category {
 
   public ArrayList<Joke> getJokes() {
     try(Connection con = DB.sql2o.open()){
-      String sql = "SELECT joke_id FROM jokes_categories WHERE category_id = :category_id";
+      String sql = "SELECT DISTINCT joke_id FROM jokes_categories WHERE category_id = :category_id";
       List<Integer> jokeIds = con.createQuery(sql)
       .addParameter("category_id", this.getId())
       .executeAndFetch(Integer.class);

@@ -1,9 +1,8 @@
 <h2 class="well">Joke Categories</h2>
 
+<!-- List of all categories -->
 
 <table border="0" class="table table-striped">
-      <th>Type</th>
-
   <tbody>
   #foreach ($category in $categories)
   <tr>
@@ -14,7 +13,11 @@
   </tbody>
 </table>
 
-<h3>Not satisfied with the list of categories? Add a new one!</h3>
+<hr/>
+
+<!-- Form to add a new category -->
+
+<h4>Did we miss a category? Add a new one!</h4>
   <form action="/categories/add" method="post">
     <div class="form-group">
       <label for="type">Category name: </label>

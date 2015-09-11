@@ -1,6 +1,7 @@
+<!-- List of all jokes in the whole site -->
 
 <h2 class="well">Jokes</h2>
-<table border="0" class="table table-striped">
+<table border="0" class="table table-hover">
   <th>Question</th>
   <th>Answer</th>
   <th>Hilarious?</th>
@@ -10,8 +11,9 @@
       <td>$joke.getQuestion()</td>
       <td>$joke.getAnswer()</td>
       <td>
+        $joke.getHilarity()<br>
         <a href="/jokes/$joke.getId()/up"><span class="glyphicon glyphicon-thumbs-up">
-        </span></a> $joke.getHilarity()
+        </span></a>
         <a href="/jokes/$joke.getId()/down"><span class="glyphicon glyphicon-thumbs-down">
         </span></a> </td>
       </tr>
@@ -19,16 +21,20 @@
     </tbody>
   </table>
 
-  <p>Know another great joke? Add it to our list:</p>
+<hr/>
+
+<!-- Form to add a new joke -->
+
+  <h4>Know another great joke? Add it to our list:</h4>
   <br>
   <form action="/jokes/add" method="post">
     <input id="categoryId" name="categoryId" type="hidden" value="$category.getId()">
 
     <div class="form-group">
-      <label for="question">Add joke: (Max 8000 characters)</label>
+      <label for="question">Joke (max 8000 characters)</label>
       <input id="question" name="question" type="text" class="form-control">
       <br>
-      <label for="answer">Add punchline (optional)</label>
+      <label for="answer">Punchline (optional)</label>
       <input id="answer" name="answer" type="text" class="form-control">
     </div>
 
