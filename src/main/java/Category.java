@@ -85,16 +85,6 @@ public class Category {
     }
   }
 
-  public void updateType(String type) {
-    try(Connection con = DB.sql2o.open()) {
-      String sql = "UPDATE categories SET type = :type WHERE id = :id";
-      con.createQuery(sql)
-      .addParameter("type", type)
-      .addParameter("id", id)
-      .executeUpdate();
-    }
-  }
-
   public static List<Category> search(String searchCategory) {
     String lowerCaseSearch = searchCategory.toLowerCase();
     String sql = "SELECT * FROM categories WHERE LOWER (categories.type) LIKE '%" + lowerCaseSearch + "%'";
@@ -105,20 +95,5 @@ public class Category {
     }
     return categoryResults;
   }
-
-  public void delete() {
-    try(Connection con = DB.sql2o.open()) {
-      String deleteQuery = "DELETE FROM categories WHERE id = :id;";
-      con.createQuery(deleteQuery)
-      .addParameter("id", id)
-      .executeUpdate();
-
-      String joinDeleteQuery = "DELETE FROM jokes_categories WHERE category_id = :categoryId";
-      con.createQuery(joinDeleteQuery)
-      .addParameter("categoryId", this.getId())
-      .executeUpdate();
-    }
-  }
-  
 
 }

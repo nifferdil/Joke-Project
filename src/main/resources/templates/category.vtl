@@ -12,13 +12,13 @@
     <tbody>
     #foreach($joke in $category.getJokes())
       <tr>
-        <td>
-         <a href="/jokes/$joke.getId()/up"><span class="glyphicon glyphicon-thumbs-up">
+          <td>$joke.getQuestion()</td>
+          <td>$joke.getAnswer()</td>
+         <td><a href="/jokes/$joke.getId()/up"><span class="glyphicon glyphicon-thumbs-up">
            </span></a> $joke.getHilarity()
              <a href="/jokes/$joke.getId()/down"><span class="glyphicon glyphicon-thumbs-down">
                </span></a> </td>
-        <td><a href="/jokes/$joke.getId()">$joke.getQuestion()</a></td>
-        <td>$joke.getAnswer()</td></tr>
+      </tr>
     #end
     </tbody>
   </table>

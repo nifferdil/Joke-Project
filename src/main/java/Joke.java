@@ -29,7 +29,6 @@ public class Joke {
     this.answer = answer;
   }
 
-
   @Override
   public boolean equals(Object otherJoke){
     if (!(otherJoke instanceof Joke)) {
@@ -39,7 +38,6 @@ public class Joke {
       return this.getQuestion().equals(newJoke.getQuestion());
     }
   }
-
 
   public static List<Joke> all() {
     String sql = "SELECT * FROM jokes ORDER BY hilarity DESC";
@@ -69,21 +67,6 @@ public class Joke {
     }
   }
 
-
-  public void delete() {
-    try(Connection con = DB.sql2o.open()) {
-      String sql = "DELETE FROM jokes WHERE id = :id";
-      con.createQuery(sql)
-      .addParameter("id", id)
-      .executeUpdate();
-
-      String joinDeleteQuery = "DELETE FROM jokes_categories WHERE joke_id = :joke_id";
-      con.createQuery(joinDeleteQuery)
-      .addParameter("joke_id", this.getId())
-      .executeUpdate();
-    }
-  }
-
   public void hilarityUp() {
     try(Connection con = DB.sql2o.open()) {
       String sql = "UPDATE jokes SET hilarity = hilarity + 1 WHERE id = :id";
@@ -102,44 +85,15 @@ public class Joke {
     }
   }
 
-
-    public static List<Joke> search(String searchJoke) {
-      String lowerCaseSearch = searchJoke.toLowerCase();
-      String sql = "SELECT * FROM jokes WHERE LOWER (jokes.question) LIKE '%" + lowerCaseSearch + "%'";
-      List<Joke> jokeResults;
-      try (Connection con = DB.sql2o.open()) {
-        jokeResults = con.createQuery(sql)
-          .executeAndFetch(Joke.class);
-      }
+  public static List<Joke> search(String searchJoke) {
+    String lowerCaseSearch = searchJoke.toLowerCase();
+    String sql = "SELECT * FROM jokes WHERE LOWER (jokes.question) LIKE '%" + lowerCaseSearch + "%'";
+    List<Joke> jokeResults;
+    try (Connection con = DB.sql2o.open()) {
+      jokeResults = con.createQuery(sql)
+        .executeAndFetch(Joke.class);
+    }
       return jokeResults;
-    }
-
-  public void addCategory(Category category) {
-    try(Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO jokes_categories (joke_id, category_id) VALUES (:joke_id, :category_id)";
-      con.createQuery(sql)
-      .addParameter("joke_id", this.getId())
-      .addParameter("category_id", category.getId())
-      .executeUpdate();
-    }
   }
 
-  public List<Category> getCategories() {
-    try (Connection con = DB.sql2o.open()) {
-      String sql = "SELECT categories.* FROM jokes JOIN jokes_categories ON (jokes_categories.joke_id = jokes.id) JOIN categories ON (jokes_categories.category_id = categories.id) WHERE joke_id=:id";
-      return con.createQuery(sql)
-      .addParameter("id", id)
-      .executeAndFetch(Category.class);
-    }
-  }
-
-  public void removeCategory(int category_id) {
-    try (Connection con = DB.sql2o.open()) {
-      String removeCategoryQuery = "DELETE FROM jokes_categories WHERE category_id = :category_id AND joke_id = :id";
-      con.createQuery(removeCategoryQuery)
-      .addParameter("category_id", category_id)
-      .addParameter("id", this.getId())
-      .executeUpdate();
-    }
-  }
 }

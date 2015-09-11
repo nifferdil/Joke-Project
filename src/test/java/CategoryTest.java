@@ -66,24 +66,4 @@ public class CategoryTest {
     assertEquals(savedJokes.size(), 1);
   }
 
-  @Test
-  public void delete_deletesAllJokesAndListAssociations() {
-    Category myCategory = new Category("Riddle");
-    myCategory.save();
-    Joke myJoke = new Joke("Knock Knock", "Orange you glad");
-    myJoke.save();
-    myCategory.addJoke(myJoke);
-    myCategory.delete();
-    assertEquals(myJoke.getCategories().size(), 0);
-  }
-
-  @Test
-  public void updateType_changesType() {
-    Category myCategory = new Category("Riddle");
-    myCategory.save();
-    myCategory.updateType("Family");
-    assertEquals("Family", Category.all().get(0).getType());
-  }
-
-
 }
