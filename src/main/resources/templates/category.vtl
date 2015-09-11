@@ -1,34 +1,39 @@
 
 <h2 class="well">Welcome to $category.getType() page</h2>
 
+<!-- List of all the jokes in this category -->
 
 #if($category.getJokes().size() != 0)
-<h2>$category.getType():</h2>
-  <table border="0" class="table table-striped">
-    <th>Question</th>
-    <th>Answer</th>
-    <th>Hilarious?</th>
-
-    <tbody>
-    #foreach($joke in $category.getJokes())
-      <tr>
-          <td>$joke.getQuestion()</td>
-          <td>$joke.getAnswer()</td>
-          <td>
-            <a href="/jokes/$joke.getId()/up"><span class="glyphicon glyphicon-thumbs-up">
-            </span></a> $joke.getHilarity()
-            <a href="/jokes/$joke.getId()/down"><span class="glyphicon glyphicon-thumbs-down">
-            </span></a> </td>
-      </tr>
-    #end
-    </tbody>
-  </table>
+    <table border="0" class="table table-hover">
+      <th>Question</th>
+      <th>Answer</th>
+      <th>Hilarious?</th>
+        <tbody>
+              #foreach($joke in $category.getJokes())
+                <tr>
+                  #if ($joke.getQuestion())
+                    <td>$joke.getQuestion()</td>
+                    <td>$joke.getAnswer()</td>
+                    <td>
+                      $joke.getHilarity()<br>
+                      <a href="/jokes/$joke.getId()/up"><span class="glyphicon glyphicon-thumbs-up">
+                      </span></a>
+                      <a href="/jokes/$joke.getId()/down"><span class="glyphicon glyphicon-thumbs-down">
+                      </span></a> </td>
+                  #end
+                </tr>
+              #end
+        </tbody>
+    </table>
 #else
-  <h4>Currently this category doesn't have any jokes... Add the first joke to this category! </h4>
+    <h4>This category doesn't have any jokes... Add the first joke to this category! </h4>
 #end
 
-<h3>Add a joke to this category:</h3>
+<hr/>
 
+<!-- Form to select an existing joke -->
+
+<h4>Assign one of our jokes to this category:</h4>
 <form action='/categories/$category.getId()/add-jokes' method='post'>
   <input id="category_id" name="category_id" type="hidden" value="$category.getId()">
   <div class="form-group">
@@ -44,6 +49,9 @@
 
 <hr/>
 
+<!-- Form to add a new joke -->
+
+<h4>Or add your own:</h4>
 <form action="/categories/$category.getId()/add-new-joke" method="post">
   <input id="category_id" name="category_id" type="hidden" value="$category.getId()">
 

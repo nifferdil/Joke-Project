@@ -1,41 +1,59 @@
 <h2 class="well">Search Results:</h2>
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Joke Question</th>
-      <th>Joke Answer</th>
-      <th>Hilarity</th>
-    </tr>
-  </thead>
-  <tbody>
-    #foreach ($joke in $jokes)
-      <tr>
-        <td>$joke.getQuestion()</td>
-        <td>$joke.getAnswer()</td>
-        <td>
-        $joke.getHilarity()
-        </td>
-      </tr>
-    #end
-  </tbody>
-</table>
+<!-- List of results from jokes -->
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Category Type</th>
-      <th>View</th>
-    </tr>
-  </thead>
-  <tbody>
-    #foreach ($category in $categories)
+#if ($jokes.size() != 0)
+  <h4>Results from all jokes</h4>
+
+  <table class="table table-hover">
+    <thead>
       <tr>
-        <td>$category.getType()</td>
-        <td>
-          <a href="/categories/$category.getId()" method="get" class="btn btn-info">View</a>
-        </td>
+        <th>Joke Question</th>
+        <th>Joke Answer</th>
+        <th>Hilarity</th>
       </tr>
-    #end
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      #foreach ($joke in $jokes)
+        <tr>
+          <td>$joke.getQuestion()</td>
+          <td>$joke.getAnswer()</td>
+          <td>
+          $joke.getHilarity()
+          </td>
+        </tr>
+      #end
+    </tbody>
+  </table>
+#else
+  No jokes matched your search
+#end
+
+<hr/>
+
+<!-- List of results from categories -->
+
+#if ($categories.size() != 0)
+  <h4>Results from all categories</h4>
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Category Type</th>
+        <th>View</th>
+      </tr>
+    </thead>
+    <tbody>
+      #foreach ($category in $categories)
+        <tr>
+          <td>$category.getType()</td>
+          <td>
+            <a href="/categories/$category.getId()" method="get" class="btn btn-info">View</a>
+          </td>
+        </tr>
+      #end
+    </tbody>
+  </table>
+#else
+  No categories matched your search
+#end
