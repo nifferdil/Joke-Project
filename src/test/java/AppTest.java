@@ -23,6 +23,7 @@ public class AppTest extends FluentTest {
   @ClassRule
   public static DatabaseRule database = new DatabaseRule();
 
+
   @Test
   public void rootTest() {
     goTo("http://localhost:4567/");
@@ -31,11 +32,11 @@ public class AppTest extends FluentTest {
 
   @Test
   public void formForAddingJokesIsDisplayedOntheHomePage() {
-   goTo("http://localhost:4567");
-   assertThat(pageSource()).contains("Add a joke to make someone smile.");
- }
+    goTo("http://localhost:4567");
+    assertThat(pageSource()).contains("Add a joke to make someone smile.");
+  }
 
- @Test
+  @Test
   public void jokeIsSavedToDatabaseAndDisplayedOntheJokesPage() {
     Joke myJoke = new Joke("What does a ghost eat for breakfast?", "booberries");
     myJoke.save();
@@ -51,13 +52,13 @@ public class AppTest extends FluentTest {
   }
 
   @Test
-   public void categoryIsSavedToDatabaseAndDisplayedOntheCategoriesPage() {
-     Category category = new Category("Blonde Jokes");
-     category.save();
-     String categoryPath = ("http://localhost:4567/categories");
-     goTo(categoryPath);
-     assertThat(pageSource()).contains("Blonde Jokes");
-   }
+  public void categoryIsSavedToDatabaseAndDisplayedOntheCategoriesPage() {
+    Category category = new Category("Blonde Jokes");
+    category.save();
+    String categoryPath = ("http://localhost:4567/categories");
+    goTo(categoryPath);
+    assertThat(pageSource()).contains("Blonde Jokes");
+  }
 
   @Test
   public void categoryIsDisplayedOnItsPage() {
@@ -98,6 +99,28 @@ public class AppTest extends FluentTest {
     String searchPath = String.format("http://localhost:4567/search/results?main-search=Technology");
     goTo(searchPath);
     assertThat(pageSource()).contains(myCategory.getType());
+  }
+
+  @Test
+  public void hilarityUp_IncreasesHilarityNumberByOne() {
+    Joke myJoke = new Joke("What does a ghost eat for breakfast?", "booberries");
+    myJoke.save();
+    Joke savedJoke = Joke.find(myJoke.getId());
+    savedJoke.hilarityUp();
+    String jokePath = String.format("http://localhost:4567/jokes");
+    goTo(jokePath);
+    assertThat(pageSource()).contains(Integer.toString(1));
+  }
+
+  @Test
+  public void hilarityDown_DecreasesHilarityNumberByOne() {
+    Joke myJoke = new Joke("What does a ghost eat for breakfast?", "booberries");
+    myJoke.save();
+    Joke savedJoke = Joke.find(myJoke.getId());
+    savedJoke.hilarityDown();
+    String jokePath = String.format("http://localhost:4567/jokes");
+    goTo(jokePath);
+    assertThat(pageSource()).contains(Integer.toString(-1));
   }
 
 }
