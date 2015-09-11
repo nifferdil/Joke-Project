@@ -48,7 +48,7 @@ public class JokeTest {
     public void search_filtersJokes() {
       Joke myJoke = new Joke("What does a ghost eat for breakfast?", "booberries");
       myJoke.save();
-      List searchResult = Joke.search("ghost");
+      List searchResult = Joke.search("breakfast");
       assertTrue(myJoke.equals(searchResult.get(0)));
     }
 

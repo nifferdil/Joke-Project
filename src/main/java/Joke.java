@@ -106,10 +106,9 @@ public class Joke {
     public static List<Joke> search(String searchJoke) {
       String lowerCaseSearch = searchJoke.toLowerCase();
       String sql = "SELECT * FROM jokes WHERE LOWER (jokes.question) LIKE '%" + lowerCaseSearch + "%'";
-      String sql2 = "SELECT * FROM jokes WHERE LOWER (jokes.answer) LIKE '%" + lowerCaseSearch + "%'";
       List<Joke> jokeResults;
       try (Connection con = DB.sql2o.open()) {
-        jokeResults = con.createQuery(sql, sql2)
+        jokeResults = con.createQuery(sql)
           .executeAndFetch(Joke.class);
       }
       return jokeResults;
