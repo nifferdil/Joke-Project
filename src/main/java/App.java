@@ -55,7 +55,6 @@ public class App {
 
     get("/categories", (request, response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
-      // model.put("jokes", Joke.all());
       model.put("categories", Category.all());
       model.put("template", "/templates/categories.vtl");
       return new ModelAndView(model, layout);
@@ -104,29 +103,23 @@ public class App {
       return null;
     });
 
+    get("/jokes/:id/up", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      int id = Integer.parseInt(request.params("id"));
+      Joke joke = Joke.find(id);
+      joke.hilarityUp();
+      response.redirect("/jokes");
+      return null;
+    });
 
-    // post("/jokes", (request, response) -> {
-    //   HashMap<String, Object> model = new HashMap<String, Object>();
-    //   String question = request.params(":id");
-    //   model.put("jokes", Joke.all());
-    //   String answer = request.queryParams("answer");
-    //   Joke newJoke = new Joke(question, answer);
-    //   newJoke.save();
-    //   newJoke.hilarityUp();
-    //   response.redirect("/jokes");
-    //   return null;
-    // });
-    //
-    // post("/jokes", (request, response) -> {
-    //   HashMap<String, Object> model = new HashMap<String, Object>();
-    //   String question = request.queryParams("question");
-    //   String answer = request.queryParams("answer");
-    //   Joke newJoke = new Joke(question, answer);
-    //   newJoke.save();
-    //   newJoke.hilarityDown();
-    //   response.redirect("/jokes");
-    //   return null;
-    // });
+    get("/jokes/:id/down", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      int id = Integer.parseInt(request.params("id"));
+      Joke joke = Joke.find(id);
+      joke.hilarityDown();
+      response.redirect("/jokes");
+      return null;
+    });
 
   }
 }
