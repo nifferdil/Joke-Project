@@ -121,5 +121,25 @@ public class App {
       return null;
     });
 
+    // get("/categories/:id/up", (request, response) -> {
+    //   int categoryId = Integer.parseInt(request.params("id"));
+    //   Category category = Category.find(categoryId);
+    //   int id = Integer.parseInt(request.params("id"));
+    //   Joke joke = Joke.find(id);
+    //   joke.hilarityUp();
+    //   response.redirect("/categories/" + categoryId);
+    //   return null;
+    // });
+    //
+    // get("/categories/:id/down", (request, response) -> {
+    //   int categoryId = Integer.parseInt(request.params("id"));
+    //   Category category = Category.find(categoryId);
+    //   int id = Integer.parseInt(request.params("id"));
+    //   Joke joke = Joke.find(id);
+    //   joke.hilarityDown();
+    //   response.redirect("/categories/" + categoryId);
+    //   return null;
+    // });
+
   }
 }
