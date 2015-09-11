@@ -2,7 +2,7 @@
 
 Add a joke to make someone smile.
 
-<form action="/jokes" method="post">
+<form action="/jokes/add" method="post">
   <input id="categoryId" name="categoryId" type="hidden" value="$category.getId()">
 
   <div class="form-group">
@@ -10,7 +10,7 @@ Add a joke to make someone smile.
     <input id="question" name="question" type="text" class="form-control">
     <br>
     <label for="answer">Add punchline (optional)</label>
-    <input id="answer" name="answer" type="text" class="form-control">
+    <input id="answer" name="answer" type="text-area" class="form-control">
   </div>
 
   <button type="submit" class="btn btn-success">Add joke</button>

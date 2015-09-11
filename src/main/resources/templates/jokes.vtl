@@ -1,16 +1,23 @@
-#foreach $joke in $jokes
 
-<ul>
-  <li>$joke.getQuestion()</li>
-  <li>$joke.getAnswer()</li>
-  <li>$joke.getHilarity()</li>
-  <hr>
-</ul>
+<h2 class="well">Jokes</h2>
+<table border="1" class="table table-striped">
+  <th>Question</th>
+  <th>Answer</th>
+  <th>Hilarity</th>
+  <tbody>
+#foreach ($joke in $jokes)
+  <tr>
+    <td>$joke.getQuestion()</td>
+    <td>$joke.getAnswer()</a></td>
+    <td>$joke.getHilarity()
+    <a href="/jokes/$joke.getId()/up"><span class="glyphicon glyphicon-thumbs-up">
+    </span></a>
+        <a href="/jokes/$joke.getId()/down"><span class="glyphicon glyphicon-thumbs-down">
+          </span></a> </td>
+  </tr>
 #end
-
-
-<a href="/"><span class="glyphicon glyphicon-thumbs-up"></span></a>
-<a href="/"><span class="glyphicon glyphicon-thumbs-down"></span></a>
+</tbody>
+</table>
 
 <p>Know another great joke? Add it to our list:</p>
 <br>
