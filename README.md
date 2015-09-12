@@ -34,6 +34,10 @@ In this joke machine, you can add your favorite jokes, and then rate other jokes
 
 Java, Apache Spark and Velocity templates, PostgreSQL Database, HTML5, and CSS3
 
+## UI
+
+<img src="src/main/resources/public/img/ss.png">
+
 ### Legal
 
 Copyright (c) 2015 **Nataliya Bareeva-Miller, Aimee Reiss, Jennifer Morkunas, and Diana Holland**
